@@ -73,7 +73,7 @@ trading:
     sell_factor: 1.0050
   price_change_threshold: 0.0005
 
-# Hedge-specific configuration
+# Hyperliquid DEX Hedge-specific configuration
 hedge:
   api_wallet_address: "<YOUR_API_WALLET_ADDRESS>"
   user_wallet_address: "<YOUR_USER_WALLET_ADDRESS>"
