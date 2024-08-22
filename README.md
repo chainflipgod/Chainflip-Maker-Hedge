@@ -13,7 +13,7 @@ This project consists of two main components: a maker bot and a hedge bot for th
 
 1. Clone the repository:
 
-git clone [https://github.com/yourusername/chainflip-maker-hedge-bot.git](https://github.com/chainflipgod/Chainflip-Maker-Hedge/)
+git clone [https://github.com/chainflipgod/Chainflip-Maker-Hedge.git](https://github.com/chainflipgod/Chainflip-Maker-Hedge/)
 cd Chainflip-Maker-Hedge
 
 2. Run the setup script:
