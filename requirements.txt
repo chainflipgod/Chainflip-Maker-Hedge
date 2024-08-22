@@ -1,0 +1,6 @@
+aiohttp
+websockets
+PyYAML
+requests
+eth-account
+hyperliquid-python-sdk
