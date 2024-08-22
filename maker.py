@@ -4,6 +4,8 @@ import json
 import logging
 import time
 import math
+import uuid
+from datetime import datetime
 import aiohttp
 import re
 import yaml
@@ -52,7 +54,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', date
 TELEGRAM_BOT_TOKEN = config['telegram']['bot_token']
 TELEGRAM_CHAT_ID = config['telegram']['chat_id']
 
-# File to store order fill information
+# File to store order fill information for Hummingbot
 ORDER_FILL_FILE = config['order_fill_file']
 
 # Initialize last_order_prices
@@ -60,9 +62,6 @@ last_order_prices = {'ETH': 0, 'BTC': 0, 'DOT': 0, 'ARBITRUM_ETH': 0}
 
 # Global variable to store latest Hyperliquid prices
 hyperliquid_prices = {'ETH': 0, 'BTC': 0, 'DOT': 0, 'ARBITRUM_ETH': 0}
-
-# LP address identifiers
-LP_IDENTIFIERS = config['lp_identifiers']
 
 def remove_ansi_codes(text):
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
@@ -170,10 +169,8 @@ def handle_limit_order(order):
         fees_usdc = abs(usdc_change) * 0.0005
         fees_asset = fees_usdc / average_price if average_price != 0 else 0
 
-        lp_name = LP_IDENTIFIERS.get(lp_address, f"{lp_address[:8]}...{lp_address[-8:]}")
-
         return {
-            "lp_name": lp_name,
+            "lp_address": lp_address,
             "base_asset": base_asset,
             "quote_asset": quote_asset,
             "side": side,
@@ -195,10 +192,8 @@ def handle_range_order(order):
     fees_quote = int(order["fees"]["quote"], 16)
     liquidity = int(order["liquidity"], 16)
 
-    lp_name = LP_IDENTIFIERS.get(lp_address, f"{lp_address[:8]}...{lp_address[-8:]}")
-
     return {
-        "lp_name": lp_name,
+        "lp_address": lp_address,
         "base_asset": base_asset,
         "quote_asset": quote_asset,
         "range_start": range_start,
@@ -217,7 +212,7 @@ async def handle_order_fills(result):
         if "limit_order" in fill:
             order_data = handle_limit_order(fill["limit_order"])
             if order_data:
-                if order_data["lp_name"] == "Chainflipgod":
+                if order_data["lp_address"] == CHAINFLIP_LP_ADDRESS:
                     success_message = (
                         f"Our order filled: Swapped {abs(order_data['asset_change']):.8f} {order_data['base_asset']} "
                         f"(${abs(order_data['usdc_change']):.2f}) → {abs(order_data['usdc_change']):.2f} USDC "
@@ -241,13 +236,13 @@ async def handle_order_fills(result):
                     }
                     await write_order_fill(fill_data)
                 else:
-                    logging.info(f"{Colors.YELLOW}Other LP order filled: LP {order_data['lp_name']}: "
+                    logging.info(f"{Colors.YELLOW}Other LP order filled: LP {order_data['lp_address']}: "
                                  f"Swapped {abs(order_data['asset_change']):.8f} {order_data['base_asset']} (${abs(order_data['usdc_change']):.2f}) → "
                                  f"{abs(order_data['usdc_change']):.2f} USDC at an average price of ${order_data['average_price']:.2f}. "
                                  f"Fees earned: {order_data['fees_asset']:.8f} {order_data['base_asset']} (${order_data['fees_usdc']:.4f} USDC){Colors.RESET}")
         elif "range_order" in fill:
             range_data = handle_range_order(fill["range_order"])
-            logging.info(f"{Colors.YELLOW}Range order: LP {range_data['lp_name']}: "
+            logging.info(f"{Colors.YELLOW}Range order: LP {range_data['lp_address']}: "
                          f"{range_data['base_asset']}/{range_data['quote_asset']} "
                          f"Range: {range_data['range_start']} to {range_data['range_end']}, "
                          f"Fees: {range_data['fees_base']} {range_data['base_asset']}, {range_data['fees_quote']} {range_data['quote_asset']}, "
