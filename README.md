@@ -8,6 +8,9 @@ This project consists of two main components: a maker bot and a hedge bot for th
 
 - Python 3.7 or higher
 - pip (Python package installer)
+- Chainflip LP API running from your server [Instructions here if needed](https://github.com/chainflip-io/chainflip-mainnet-apis/)
+- A Chainflip LP account funded with at least 10 FLIP
+- Hyperliquid account with your ETH address, API and API secret key 
 
 ## Installation
 
