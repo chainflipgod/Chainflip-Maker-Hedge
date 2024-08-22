@@ -205,7 +205,7 @@ async def execute_perpetual_order(symbol: str, side: str, amount: float, price: 
     global total_short_amount
 
     try:
-        await update_leverage(symbol, 5)
+        await update_leverage(symbol, 1) #Adjust your Hyperliquid leverage here. Set to 1 initially. 
 
         if symbol not in sz_decimals:
             error_message = f"No size decimal information for {symbol}. Skipping order."
