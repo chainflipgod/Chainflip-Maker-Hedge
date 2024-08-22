@@ -52,7 +52,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', date
 TELEGRAM_BOT_TOKEN = config['telegram']['bot_token']
 TELEGRAM_CHAT_ID = config['telegram']['chat_id']
 
-# File to store order fill information for Hummingbot
+# File to store order fill information
 ORDER_FILL_FILE = config['order_fill_file']
 
 # Initialize last_order_prices
