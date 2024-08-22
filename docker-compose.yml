@@ -1,0 +1,17 @@
+version: '3'
+services:
+  maker:
+    build: .
+    command: python maker.py
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  hedge:
+    build: .
+    command: python hedge.py
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
