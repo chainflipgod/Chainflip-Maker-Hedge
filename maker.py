@@ -221,7 +221,7 @@ async def handle_order_fills(result):
                     )
                     await log_success(success_message)
 
-                    # Write order fill information to file for Hummingbot
+                    # Write order fill information to file
                     fill_data = {
                         "timestamp": int(time.time()),
                         "base_asset": order_data['base_asset'],
