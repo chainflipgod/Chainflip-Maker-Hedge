@@ -4,6 +4,8 @@
 
 This project consists of two main components: a maker bot and a hedge bot for the Chainflip protocol. The maker bot facilitates market making on the Chainflip platform, while the hedge bot manages risk by hedging positions on Hyperliquid.
 
+Disclaimer: Fully examine all code before running it. Before runn
+
 ## Prerequisites
 
 - Python 3.7 or higher
@@ -102,3 +104,8 @@ If you encounter any issues:
 3. Verify that you have the latest version of the code and all dependencies are installed.
 4. Make sure your virtual environment is activated when running the bots.
 
+## Disclaimer
+This market making bot is provided as-is, without any guarantees or warranty. Use it at your own risk. The authors are not responsible for any potential losses incurred while using this bot.
+
+## Contributing
+Contributions to improve the bot are welcome. Please submit pull requests or open issues to discuss potential improvements or report bugs.
