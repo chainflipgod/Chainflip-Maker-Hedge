@@ -1,0 +1,125 @@
+# config.yaml
+
+# WebSocket and API URLs
+chainflip_ws_url: "ws://127.0.0.1:10589"
+chainflip_api_url: "http://localhost:10589"
+hyperliquid_ws_url: "wss://api.hyperliquid.xyz/ws"
+
+# Chainflip LP address
+chainflip_lp_address: "<YOUR_CHAINFLIP_LP_ADDRESS>"
+
+# Assets
+assets:
+  base:
+    chain: "Ethereum"
+    asset: "ETH"
+  btc:
+    chain: "Bitcoin"
+    asset: "BTC"
+  dot:
+    chain: "Polkadot"
+    asset: "DOT"
+  quote:
+    chain: "Ethereum"
+    asset: "USDC"
+  arbitrum_eth:
+    chain: "Arbitrum"
+    asset: "ETH"
+
+# Trading amounts
+trading_amounts:
+  eth:
+    sell:
+      primary: 0.00
+    buy:
+      primary: 0.00
+  btc:
+    sell:
+      primary: 0.00
+    buy:
+      primary: 0.00
+  dot:
+    sell:
+      primary: 0.00
+    buy:
+      primary: 0.00
+  arbitrum_eth:
+    sell:
+      primary: 0.00
+    buy:
+      primary: 0.00
+
+# Telegram settings
+telegram:
+  bot_token: '<YOUR_TELEGRAM_BOT_TOKEN>'
+  chat_id: '<YOUR_TELEGRAM_CHAT_ID>'
+
+# Order fill file
+order_fill_file: 'order_fills.json'
+
+# Trading parameters
+trading:
+  eth:
+    buy_factor: 0.9950
+    sell_factor: 1.0050
+  btc:
+    buy_factor: 0.9950
+    sell_factor: 1.0050
+  dot:
+    buy_factor: 0.9950
+    sell_factor: 1.0050
+  arbitrum_eth:
+    buy_factor: 0.9950
+    sell_factor: 1.0050
+  price_change_threshold: 0.0005
+
+# Hedge-specific configuration
+hedge:
+  api_wallet_address: "<YOUR_API_WALLET_ADDRESS>"
+  user_wallet_address: "<YOUR_USER_WALLET_ADDRESS>"
+  private_key: "<YOUR_PRIVATE_KEY>"
+
+  price_adjustment_bps:
+    BTC:
+      buy: 50
+      sell: 50
+    ETH:
+      buy: 50
+      sell: 50
+    DOT:
+      buy: 50
+      sell: 50
+
+  last_processed_time_file: 'last_processed_time.txt'
+  database_file: 'trades.db'
+
+  check_intervals:
+    balance: 60
+    open_orders: 300
+    order_fill: 5
+    summary_log: 600
+
+  log_iterations: 300
+
+# Shared settings
+sz_decimals:
+  ETH: 18
+  BTC: 8
+  DOT: 10
+
+# PL Tracker specific configurations
+pl_tracker:
+  check_interval: 300  # 5 minutes in seconds
+  retry_interval: 60   # 1 minute in seconds
+
+# Database configuration
+database:
+  file: 'trades.db'
+
+# Logging configuration
+logging:
+  level: 'INFO'
+  format: '%(asctime)s - %(levelname)s - %(message)s'
+
+# Decimal precision
+decimal_precision: 50
