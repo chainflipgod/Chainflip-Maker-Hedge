@@ -26,7 +26,7 @@ assets:
     chain: "Arbitrum"
     asset: "ETH"
 
-# Trading amounts
+# Trading amounts - Specific your order size for buys/sells for each asset 
 trading_amounts:
   eth:
     sell:
@@ -57,7 +57,7 @@ telegram:
 # Order fill file
 order_fill_file: 'order_fills.json'
 
-# Trading parameters
+# Trading parameters - Specify your Chainflip limit order price params based upon the Hyperliquid mid-price 
 trading:
   eth:
     buy_factor: 0.9950
@@ -71,7 +71,7 @@ trading:
   arbitrum_eth:
     buy_factor: 0.9950
     sell_factor: 1.0050
-  price_change_threshold: 0.0005
+  price_change_threshold: 0.0005 #Only update order pricing if the price change exceeds this threshold in the given time setting 
 
 # Hyperliquid DEX Hedge-specific configuration
 hedge:
@@ -79,7 +79,7 @@ hedge:
   user_wallet_address: "<YOUR_USER_WALLET_ADDRESS>"
   private_key: "<YOUR_PRIVATE_KEY>"
 
-  price_adjustment_bps:
+  price_adjustment_bps: #Determine how many basis points from your Chainflip order execution you place your Hyperliquid limit orders 
     BTC:
       buy: 50
       sell: 50
